@@ -4,8 +4,7 @@
 
 TL;DR
 ------
-Docker usage
--------------
+### Docker usage
 ```sh
 docker run -e GODADDY_API_KEY=<your_key> \
            -e GODADDY_API_SECRET=<your_secret> \
@@ -13,15 +12,13 @@ docker run -e GODADDY_API_KEY=<your_key> \
            luciusm/godaddy_ddns:latest
 ```
 
-Setting as kubernetes cronjob
------------------------------
+### Setting as kubernetes cronjob
 Check `kubernetes/README.md`
 
 
 
 
-*Original Manual see below*
--------------
+## *Original Manual see below*
 
 Introduction
 ------------
