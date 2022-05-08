@@ -108,6 +108,7 @@ args = parser.parse_args()
 
 
 def main():
+    print(args)
     hostnames = args.hostname.split(".")
     if len(hostnames) < 2:
         msg = 'Hostname "{}" is not a fully-qualified host name of form "HOST.DOMAIN.TOP".'.format(
@@ -148,13 +149,14 @@ def main():
         ):
             msg = '"{}" is not valid IP address.'.format(ips)
             raise Exception(msg)
-
+    print("Trying to set {} with IP address in list {}".format(args.hostname, ipslist))
     if not args.force and len(ipslist) == 1:
         try:
             dnsaddr = socket.gethostbyname(args.hostname)
             if ipslist[0] == dnsaddr:
-                msg = "{} already has IP address {}.".format(args.hostname, dnsaddr)
-                raise Exception(msg)
+                msg = "{} already has IP address {}. Will not update record.".format(args.hostname, dnsaddr)
+                print(msg)
+                return 0
         except:
             pass
 
@@ -223,6 +225,7 @@ Correct values can be obtained from from https://developer.godaddy.com/keys/ and
         raise Exception(msg)
 
     print("IP address for {} set to {}.".format(args.hostname, args.ip))
+    return 0
 
 
 if __name__ == "__main__":
