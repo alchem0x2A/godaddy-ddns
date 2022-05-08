@@ -9,15 +9,19 @@
 # positional arguments:
 #   hostname         DNS fully-qualified host name with an 'A' record.  If the hostname consists of only a domain name
 #                    (i.e., it contains only one period), the record for '@' is updated.
+#                    If no hostname provided, get its value from env variable Default value from env variable GODADDY_DOMAIN
 #
 # optional arguments:
 #   -h, --help       show this help message and exit
 #   --version        show program's version number and exit
 #   --ip IP          DNS Address (defaults to public WAN address from https://checkip.amazonaws.com/)
-#   --key KEY        GoDaddy production key
-#   --secret SECRET  GoDaddy production secret
-#   --ttl TTL        DNS TTL.
+#   --key KEY        GoDaddy production key. Default value from env variable GODADDY_API_KEY
+#   --secret SECRET  GoDaddy production secret. Default value from env variable GODADDY_API_SECRET
+#   --ttl TTL        DNS TTL. Default value from env variable GODADDY_TTL
 #   --force          force update of GoDaddy DNS record even if DNS query indicates that record is already correct
+#
+# Alternatively, run godaddy_ddns.py alone with environmental variables:
+# GODADDY_API_KEY: set as --key KEY
 #
 # GoDaddy customers can obtain values for the KEY and SECRET arguments by creating a production key at
 # https://developer.godaddy.com/keys/.
@@ -40,9 +44,7 @@ version = "0.4"
 author = "alchem0x2a"
 original_author = "Carl Edman (CarlEdman@gmail.com)"
 import os
-
 import sys, json, argparse, socket
-
 if sys.version_info > (3,):
     from urllib.request import urlopen, Request
     from urllib.error import URLError, HTTPError
