@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Get current date
         id: date
-        run: echo "$(date +'%Y%m%d')" >> $env:CI_DATE
+        run: echo "CI_DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
       - name: Test current date
         run: echo ${CI_DATE}
       - name: Checkout
@@ -42,5 +42,5 @@ jobs:
           platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.image_name }}:${{ env.CI_DATE }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.image_name }}:${CI_DATE}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.image_name }}:latest
