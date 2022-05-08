@@ -1,7 +1,27 @@
 # godaddy-ddns
 
-*Forked version from `CarlEdman/godaddy-ddns`*
+*Forked version from `CarlEdman/godaddy-ddns` to be tailored for kubernetes usage*
 
+TL;DR
+------
+Docker usage
+-------------
+```sh
+docker run -e GODADDY_API_KEY=<your_key> \
+           -e GODADDY_API_SECRET=<your_secret> \
+           -e GODADDY_DOMAIN=<www.example.com> \
+           luciusm/godaddy_ddns:latest
+```
+
+Setting as kubernetes cronjob
+-----------------------------
+Check `kubernetes/README.md`
+
+
+
+
+*Original Manual see below*
+-------------
 
 Introduction
 ------------
