@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: godaddy-ddns-update
+  # Change the namespace if needed
+  # namespace: default
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          affinity: {}
+          containers:
+          - env:
+            - name: GODADDY_DOMAIN
+              # example: www.example.com
+              value: <<CHANGE TO YOUR DOMAIN NAME>>
+            - name: GODADDY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: GODADDY_API_KEY
+                  name: godaddy-api
+                  optional: false
+            - name: GODADDY_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: GODADDY_API_SECRET
+                  name: godaddy-api
+                  optional: false
+            image: luciusm/godaddy_ddns:latest
+            imagePullPolicy: Always
+            name: container-0
+            resources: {}
+          restartPolicy: Never
+  # Update every hour
+  schedule: 0 * * * *
+  successfulJobsHistoryLimit: 3
+  suspend: false
