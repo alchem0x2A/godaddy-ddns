@@ -45,6 +45,7 @@ author = "alchem0x2a"
 original_author = "Carl Edman (CarlEdman@gmail.com)"
 import os
 import sys, json, argparse, socket
+
 if sys.version_info > (3,):
     from urllib.request import urlopen, Request
     from urllib.error import URLError, HTTPError
@@ -154,7 +155,9 @@ def main():
         try:
             dnsaddr = socket.gethostbyname(args.hostname)
             if ipslist[0] == dnsaddr:
-                msg = "{} already has IP address {}. Will not update record.".format(args.hostname, dnsaddr)
+                msg = "{} already has IP address {}. Will not update record.".format(
+                    args.hostname, dnsaddr
+                )
                 print(msg)
                 return 0
         except:
