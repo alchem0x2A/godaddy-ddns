@@ -109,7 +109,6 @@ args = parser.parse_args()
 
 
 def main():
-    print(args)
     hostnames = args.hostname.split(".")
     if len(hostnames) < 2:
         msg = 'Hostname "{}" is not a fully-qualified host name of form "HOST.DOMAIN.TOP".'.format(
